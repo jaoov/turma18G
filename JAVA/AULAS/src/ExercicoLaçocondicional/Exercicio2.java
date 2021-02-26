@@ -58,7 +58,7 @@ public class Exercicio2 {
 			}
 			else if (numero3 == numero1 && numero3 == numero2 && numero1 == numero2) 
 			{
-				System.out.println("Os numeros devem ser diferentes um do outro!!!");
+				System.out.println("Os numeros devem ser diferentes um do outro para o programa ser executado!");
 			}
 		}
 
