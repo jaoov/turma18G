@@ -55,10 +55,6 @@ public class Conta
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -87,8 +83,8 @@ public class Conta
         {
             this.saldo =  this.saldo - valor;
         }
+		
 
-    }
-    	
+    }	
   
 }

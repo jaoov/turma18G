@@ -7,27 +7,48 @@ import CLASSES.Conta;
 public class ContaEstudantil extends Conta 
 {
 	private double limiteEstudantil;
+	private double emprestimoCredito;
+	private double emprestimoDebito;
 	private double emprestimo;
+	private double emprestimoFinal;
 	int opcao = 0;
-	Scanner ler = new Scanner (System.in);
 	
 	public ContaEstudantil(int numero, String cpf, boolean ativa, double limiteEstudantil) {
 		super(numero, cpf, ativa);
 		this.limiteEstudantil = limiteEstudantil;
 		this.setLimiteEstudantil(5000);
 		
+		this.emprestimoCredito = emprestimoCredito;
+		this.emprestimoDebito = emprestimoDebito;
 		this.emprestimo = emprestimo;
+		this.emprestimoFinal = emprestimoFinal;
+
 	}
 	
 	public double getLimiteEstudantil() {
 		return limiteEstudantil;
 	}
-
+	
 	public void setLimiteEstudantil(double limiteEstudantil) {
 		this.limiteEstudantil = limiteEstudantil;
 	}
+	
+	public double getEmprestimoCredito() {
+		return emprestimoCredito;
+	}
 
+	public void setEmprestimoCredito(double emprestimoCredito) {
+		this.emprestimoCredito = emprestimoCredito;
+	}
 
+	public double getEmprestimoDebito() {
+		return emprestimoDebito;
+	}
+
+	public void setEmprestimoDebito(double emprestimoDebito) {
+		this.emprestimoDebito = emprestimoDebito;
+	}
+	
 	public double getEmprestimo() {
 		return emprestimo;
 	}
@@ -35,21 +56,45 @@ public class ContaEstudantil extends Conta
 	public void setEmprestimo(double emprestimo) {
 		this.emprestimo = emprestimo;
 	}
-	
-	@Override 
+
+	public double getEmprestimoFinal() {
+		return emprestimoFinal;
+	}
+
+	public void setEmprestimoFinal(double emprestimoFinal) {
+		this.emprestimoFinal = emprestimoFinal;
+	}
+
+	@Override
 	public void debito(double valor) 
 	{
-		if(this.getSaldo() >= valor) {
-				this.setSaldo(this.getSaldo() - valor);
-		}
-		else if(valor > this.getSaldo()) {
-			System.out.println("   Você não possui saldo o suficiente... Deseja solicitar um");	
-			System.out.println("          empréstimo estudantil no valor de R$5.000? [1] Sim / [0] Não");
-			opcao = ler.nextInt();
-		}	
-			if(opcao == 1) {
-				this.credito(getLimiteEstudantil());
-			}
+		this.setEmprestimo(this.getEmprestimo() + valor );
+		this.setEmprestimoFinal(this.getEmprestimo());
+		this.setEmprestimoDebito(valor + this.emprestimoDebito);
+		this.setLimiteEstudantil(this.getLimiteEstudantil()- valor);
+		super.debito(super.getSaldo()+ this.getEmprestimo());
+		
+		
+		System.out.println();
+		
+		System.out.println("Seu saldo atual é: "+this.getEmprestimoFinal());
+		System.out.println("O seu limite de transação é: "+this.getLimiteEstudantil());
+			
+	}
+	@Override
+	public void credito(double valor) 
+	{
+		
+		this.setEmprestimo(valor + this.getEmprestimo());
+		this.setEmprestimoFinal(this.getEmprestimo());
+		this.setEmprestimoCredito(valor + this.getEmprestimoCredito());
+		this.setLimiteEstudantil(this.getLimiteEstudantil()- valor);
+		super.credito(super.getSaldo()+ this.getEmprestimo());
 	
+		System.out.println();
+		
+		System.out.println("Seu saldo atual é: "+ this.getEmprestimoFinal());
+		System.out.println("O seu limite de transação é: "+this.getLimiteEstudantil());
+		
 	}
 }
