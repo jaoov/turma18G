@@ -65,23 +65,36 @@ public class ContaEstudantil extends Conta
 		this.emprestimoFinal = emprestimoFinal;
 	}
 
-	@Override
+	
+	
+	
 	public void debito(double valor) 
 	{
-		this.setEmprestimo(this.getEmprestimo() + valor );
+		
+		
+		this.setEmprestimo(this.getEmprestimo() - valor );
 		this.setEmprestimoFinal(this.getEmprestimo());
 		this.setEmprestimoDebito(valor + this.emprestimoDebito);
-		this.setLimiteEstudantil(this.getLimiteEstudantil()- valor);
-		super.debito(super.getSaldo()+ this.getEmprestimo());
 		
+		if (this.getEmprestimoFinal() < 0) 
+		{
 		
 		System.out.println();
 		
+		System.out.println("Seu valor debitado é maior que o seu saldo");
+		
+		}
+		else {
+		
+	
+			this.setLimiteEstudantil(this.getLimiteEstudantil()- valor);
+			super.debito(super.getSaldo()- this.getEmprestimo());
+		
 		System.out.println("Seu saldo atual é: "+this.getEmprestimoFinal());
 		System.out.println("O seu limite de transação é: "+this.getLimiteEstudantil());
-			
+		}		
 	}
-	@Override
+	
 	public void credito(double valor) 
 	{
 		

@@ -3,9 +3,9 @@ package CLASSES;
 public class Conta 
 {
     // ATRIBUTOS DA CLASSE
-    private int numero;
-    private String cpf;
-    private double saldo;
+    protected int numero;
+    protected String cpf;
+    protected double saldo;
     private boolean ativo;
     private double valor;
 
