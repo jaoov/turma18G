@@ -20,7 +20,7 @@ public class Atividade3
 			
 			System.out.println("Lista de tênis no estoque: "+name);
 		}
-		Collection<String> nomes2 = Arrays.asList("FILA", "KAPPA");
+		Collection<String> nomes2 = Arrays.asList("TÊNIS FILA", "TÊNIS KAPPA");
 		nomes.addAll(nomes2);
 		
 		System.out.println();
